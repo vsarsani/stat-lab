@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[40]:
 
 
 import pandas as pd
@@ -12,13 +11,11 @@ import warnings
 warnings.filterwarnings("ignore" )
 
 
-# In[41]:
-
 
 # Let us Generate 100000 Random Uniform cordinates between 0 and 10000
 
 
-# In[42]:
+
 
 
 x = np.random.uniform(0,10000,100000)
@@ -26,13 +23,9 @@ y = np.random.uniform(0,10000,100000)
 uniformpoints=np.column_stack((x,y))
 
 
-# In[43]:
 
 
 # Randomly Assign 50000 as Immune cells and others as Tumor Cells
-
-
-# In[44]:
 
 
 row_i = np.random.choice(uniformpoints.shape[0],50000)
@@ -40,14 +33,7 @@ Immunepoints=uniformpoints[row_i, :]
 Tumorpoints=uniformpoints[-row_i, :]
 
 
-# In[45]:
-
-
 # Function to make bounding boxes
-
-
-# In[46]:
-
 
 def makeboxes(points,size):
         # Find min,max of both x and y coordinates
@@ -73,14 +59,7 @@ def makeboxes(points,size):
         return grid_boxes
 
 
-# In[47]:
-
-
 # Let us make Bounding Boxes from uniform points and plot Immune and Tumor cells
-
-
-# In[48]:
-
 
 boxes=makeboxes(uniformpoints,500)
 xcors=np.concatenate([np.array(boxes)[:,0],np.array(boxes)[:,2]])
@@ -94,15 +73,7 @@ I=plt.scatter(Immunepoints[:,0],Immunepoints[:,1],color='b',alpha=0.2)
 T=plt.scatter(Tumorpoints[:,0],Tumorpoints[:,1],color='r',alpha=0.1)
 plt.legend((I,T), ('Immune Cells', 'Tumor'),scatterpoints=1,loc='upper right',fontsize=10)
 
-
-# In[49]:
-
-
 # Helper Function to count points inside box
-
-
-# In[50]:
-
 
 def in_bounding_box(points,box):
         min_x=box[0]
@@ -113,16 +84,7 @@ def in_bounding_box(points,box):
         bound_y = np.logical_and(points[:, 1] > min_y, points[:, 1] < max_y)
         bb_filter = np.logical_and(bound_x, bound_y)
         return len(points[bb_filter])
-
-
-# In[51]:
-
-
 # Calculate MH index
-
-
-# In[52]:
-
 
 def calculate_MHindex(Immunepoints,Tumorpoints,boxes):
         # Let's make a dataframe of Immune and Tunorpoints 
@@ -155,14 +117,4 @@ def calculate_MHindex(Immunepoints,Tumorpoints,boxes):
         return result_df
 
 
-# In[53]:
-
-
 calculate_MHindex(Immunepoints,Tumorpoints,boxes)
-
-
-# In[ ]:
-
-
-
-
