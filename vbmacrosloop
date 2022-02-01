@@ -1,0 +1,22 @@
+Sub iterate()
+    
+    FolderName = "C:\Users\svish\Desktop\files\"
+    If Right(FolderName, 1) <> Application.PathSeparator Then FolderName = FolderName & Application.PathSeparator
+    Fname = Dir(FolderName & "*.CSV")
+
+    'loop through the files
+    Do While Len(Fname)
+
+        With Workbooks.Open(FolderName & Fname)
+        'Insert Macros Here 
+        'Insert Macros here
+        ActiveWorkbook.Save
+        ActiveWorkbook.Close SaveChanges:=True
+        End With
+        
+        ' go to the next file in the folder
+        Fname = Dir
+
+    Loop
+    
+End Sub
